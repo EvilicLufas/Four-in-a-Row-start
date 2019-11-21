@@ -7,7 +7,7 @@ package software.testing.fourinarow;
  * 
  * @author Neil Taylor (nst@aber.ac.uk)
  */
-public class GridPosition {
+public class  GridPosition {
     
 	/** The row */ 
     private Integer row;
