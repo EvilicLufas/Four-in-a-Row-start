@@ -1,5 +1,7 @@
 package software.testing.fourinarow;
 
+import java.util.ArrayList;
+
 /**
  * Represents the grid that holds the pieces that have been
  * placed into each column.
@@ -78,11 +80,13 @@ public class Game {
      * @param column
      * @return
      */
-
+//    private static ArrayList<Integer> lastPositionList;
+    private static int[] lastPositionList = new int[2];
+    //This ArrayList is used to record the last Modified Cell
     public boolean takeTurn(int column) {
-//        GridPosition newGrid;
-//        newGrid.setColumn(column);
 
+        hasJustUndo = false;
+        //Each turn's beginning, the last turn's Player won't be able to redo
         Player currentPlayer = getActivePlayer();
 
         if (currentPlayer == Player.TWO) {
@@ -108,7 +112,7 @@ public class Game {
             //see if the chosen column still got empty cells
             //if not, return false
             if (numberOfEmptyCellsInColumn(column)>0){
-//                for (int i = 0; i < MAXIMUM_ROWS; i++) {
+                lastPositionList[0] = column;//Set the lastPositionCell's Column
                 //Because of a design error in the GUI in the original code
                 //That is, the top and bottom indexes of the same column
                 //are in the reverse order of normal
@@ -118,6 +122,7 @@ public class Game {
                     //Once an empty cell is founded, change it status to the current player
                     //and return true, if could not found one, return false
                     if (gameGrid[column][i] == CellStatus.EMPTY) {
+                        lastPositionList[1] = i;//Set the lastPositionCell's row
                         if (currentPlayer == Player.ONE) {
                             gameGrid[column][i] = CellStatus.PLAYER_ONE;
                             return true;
@@ -127,8 +132,6 @@ public class Game {
                         }
                     }
                 }
-//            }else {
-//                return false;
             }
         } catch (FourInARowException e) {
             e.printStackTrace();
@@ -191,20 +194,75 @@ public class Game {
                 }
             }
         }
+        // Once one condition is satisfied, return true
         return isDiagonal || isVertical || isHorizontal;
     }
 
+
+    //The way to do this is to record the last filled Cell
+    //Then set the condition
+
+    /**
+     * The undo must come before the next player takes a turn.
+     * Once the other player takes a turn, the undo operation should do nothing.
+     * The method returns true for success
+     * or false if the move cannot be made
+     * @return
+     */
+
+    private static boolean hasJustUndo = false;
     public boolean undo(){
+        int lastCellColumn = lastPositionList[0];
+        int lastCellRow = lastPositionList[1];
+//        if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
+//                && getActivePlayer() == Player.ONE){
+//
+//            return true;
+//        }else if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
+//                && getActivePlayer() == Player.TWO) {
+//            return true;
+//        }
 
+        if ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
+                && getActivePlayer() == Player.ONE) ||
+                (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
+                && getActivePlayer() == Player.ONE)){
+            //Set the last modified Cell to empty status
+
+            gameGrid[lastCellColumn][lastCellRow] = CellStatus.EMPTY;
+
+            hasJustUndo = true;
+            //After undo, the signal hasJustUndo will be set to true
+            //While in the each beginning of the turn, the signal will be set to false
+            //To prevent that the player use redo in different turn to cause chaos
+            return true;
+        }
+
+        return false;
     }
 
+    /**
+     * If a player has undone their last turn, the player can redo that move.
+     * The redo must come before the next player takes a turn.
+     * Once the other player takes a turn, the redo operation should do nothing.
+     * The method returns true for success or false if the move cannot be made.
+     * @return
+     */
     public boolean redo(){
+        int lastCellColumn = lastPositionList[0];
+        int lastCellRow = lastPositionList[1];
+        if (hasJustUndo = true){
+            if (getActivePlayer() == Player.ONE){
+                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
+                return true;
+            }else if (getActivePlayer() == Player.TWO){
+                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_TWO;
+                return true;
+            }
 
-
+        }
+        return false;
     }
-
-
-
 
     /**
      * Returns the number of cells in a column that have the status
