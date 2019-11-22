@@ -46,7 +46,9 @@ public class FourInARowController implements Initializable {
      */
     @FXML
     private GridPane boardGrid;
-    
+
+    //Initialize the new Game
+    private Game game = new Game();
     /**
      * Displays the current state of the board. This will redraw the 
      * entire board on the screen. 
@@ -81,7 +83,38 @@ public class FourInARowController implements Initializable {
         // else {
         //     messageArea.setText("Describe some error");
         // }
+        String colourEmpty = "#eaeaea";
+        String colourPlayerOne = "#00f";
+        String colourPlayerTwo = "#f00";
+        String nodeColour = "#eaeaea";
 
+        for (int column = 0; column < Game.MAXIMUM_COLUMNS; column++) {
+            for (int row = 0; row < Game.MAXIMUM_ROWS; row++) {
+
+                Node node = getNodeByRowColumnIndex(row + 1, column);
+                if(node instanceof Pane) {
+                    CellStatus nodeStatus = CellStatus.EMPTY;
+                    try {
+                        nodeStatus =  game.getCellStatus(column, row);
+                    } catch (FourInARowException e) {
+                        e.printStackTrace();
+                    }
+                    switch (nodeStatus){
+                        case PLAYER_ONE:
+                            nodeColour = colourPlayerOne;
+                        case PLAYER_TWO:
+                            nodeColour = colourPlayerTwo;
+                        case EMPTY:
+                            nodeColour = colourEmpty;
+                    }
+
+                    node.setStyle("-fx-background-color: " + nodeColour);
+                }
+                else {
+                    messageArea.setText("An error occur, node not in the pane ");
+                }
+            }
+        }
     }
     
     /**

@@ -18,12 +18,34 @@ public class Game {
     private CellStatus[][] gameGrid;
 
     /**
+     * The boolean variable isFirstStart judges if the game is just going to start
+     * The boolean variable isLastPlayerOne is used to judge the last player
+     * so we can get the current player
+     */
+    private static boolean isFirstStart = true;
+    private static boolean isLastPlayerOne = false;
+
+    //This array is used to record the last Modified Cell's column & row number
+    private static int[] lastPositionList = new int[2];
+
+    //The way to implement redo & undo is to record the last filled Cell
+    //Then set the condition to redo or undo
+    private static boolean hasJustUndo = false;
+
+
+
+
+
+
+    /**
      * Creates a new instance, initialising the board with the
      * Maximum values for columns and rows.
      */
     public Game() {
         gameGrid = new CellStatus[MAXIMUM_COLUMNS][MAXIMUM_ROWS];
     }
+
+
 
     /**
      * The class manages which player is currently active.
@@ -32,10 +54,8 @@ public class Game {
      * After a turn is taken by Player One, Player Two becomes the active player.
      * Then, Player One and so on.
      *
-     * @return
+     * @return current active player
      */
-    private static boolean isFirstStart = true;
-    private static boolean isLastPlayerOne = false;
     public Player getActivePlayer(){
 
         if (isFirstStart){
@@ -55,34 +75,19 @@ public class Game {
                 return Player.ONE;
             }
         }
-//        if (lastPlayer == null){
-//            return starterPlayer;
-//        }
-//        switch (lastPlayer){
-//            case ONE:
-//                return Player.TWO;
-//            case TWO:
-//                return Player.ONE;
-//            case :
-//                return starterPlayer;
-//        }
-//
-//
-//        Player currentPlayer = Player.ONE;
+
     }
+
 
     /**
      * By specifying the column that the player has selected.
      * The code will then find the lowest row in that column that is empty and insert the piece.
-     * If the column is full, the value false should be returned.
-     * True is returned if the piece can be placed.
      *
-     * @param column
-     * @return
+     * @param column  the column selected by current player
+     * @return If the column is full, the value false should be returned.
+     * True is returned if the piece can be placed.
      */
-//    private static ArrayList<Integer> lastPositionList;
-    private static int[] lastPositionList = new int[2];
-    //This ArrayList is used to record the last Modified Cell
+
     public boolean takeTurn(int column) {
 
         hasJustUndo = false;
@@ -125,9 +130,17 @@ public class Game {
                         lastPositionList[1] = i;//Set the lastPositionCell's row
                         if (currentPlayer == Player.ONE) {
                             gameGrid[column][i] = CellStatus.PLAYER_ONE;
+                            //Once one turn the player played successful
+                            //Judge if the current player has won with the hasWon() method
+                            if (hasWon()){
+                                System.out.println("The current player"+ getActivePlayer() +" has won");
+                            }
                             return true;
                         } else if (currentPlayer == Player.TWO) {
                             gameGrid[column][i] = CellStatus.PLAYER_TWO;
+                            if (hasWon()){
+                                System.out.println("The current player"+ getActivePlayer() +" has won");
+                            }
                             return true;
                         }
                     }
@@ -155,10 +168,12 @@ public class Game {
     }
 
     /**
-     * After a player has taken a turn,
-     * check if the player has won
+     * After a player has taken a turn, check if the player has won
+     * Three boolean variables : isVertical & isDiagonal & isHorizontal
+     * represent 3 ways to win the game
+     * As long as one of these conditions is met, the current player wins
      *
-     * @return
+     * @return if the current player won, return true, if not, return false
      */
     public boolean hasWon(){
         Player currentPlayer = getActivePlayer();
@@ -199,29 +214,18 @@ public class Game {
     }
 
 
-    //The way to do this is to record the last filled Cell
-    //Then set the condition
 
     /**
      * The undo must come before the next player takes a turn.
      * Once the other player takes a turn, the undo operation should do nothing.
+     *
+     * @return
      * The method returns true for success
      * or false if the move cannot be made
-     * @return
      */
-
-    private static boolean hasJustUndo = false;
     public boolean undo(){
         int lastCellColumn = lastPositionList[0];
         int lastCellRow = lastPositionList[1];
-//        if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
-//                && getActivePlayer() == Player.ONE){
-//
-//            return true;
-//        }else if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
-//                && getActivePlayer() == Player.TWO) {
-//            return true;
-//        }
 
         if ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
                 && getActivePlayer() == Player.ONE) ||
@@ -245,13 +249,19 @@ public class Game {
      * If a player has undone their last turn, the player can redo that move.
      * The redo must come before the next player takes a turn.
      * Once the other player takes a turn, the redo operation should do nothing.
-     * The method returns true for success or false if the move cannot be made.
+     *
      * @return
+     * The method returns true for success or false if the move cannot be made.
+     *
      */
     public boolean redo(){
         int lastCellColumn = lastPositionList[0];
         int lastCellRow = lastPositionList[1];
+        //Only after undo can the current player perform redo
         if (hasJustUndo = true){
+            //If the last modified cell's player is current active player
+            //Means it is in the same turn and the next turn did not begin
+            //So the redo operation is allowed
             if (getActivePlayer() == Player.ONE){
                 gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
                 return true;
@@ -329,3 +339,29 @@ public class Game {
 
     }
 }
+
+
+//        if (lastPlayer == null){
+//            return starterPlayer;
+//        }
+//        switch (lastPlayer){
+//            case ONE:
+//                return Player.TWO;
+//            case TWO:
+//                return Player.ONE;
+//            case :
+//                return starterPlayer;
+//        }
+//
+//
+//        Player currentPlayer = Player.ONE;
+
+
+//        if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
+//                && getActivePlayer() == Player.ONE){
+//
+//            return true;
+//        }else if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
+//                && getActivePlayer() == Player.TWO) {
+//            return true;
+//        }
