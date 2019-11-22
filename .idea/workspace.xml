@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af1bb42c-65c2-4f90-a990-3802593b2afe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" afterDir="false" />
     </list>
@@ -23,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="346" selection-start-line="346" selection-end-line="354" selection-end-column="2" />
+            <state relative-caret-position="1296">
+              <caret line="201" column="17" lean-forward="true" selection-start-line="201" selection-start-column="17" selection-end-line="201" selection-end-column="17" />
               <folding>
                 <element signature="e#639#640#0" expanded="true" />
                 <element signature="e#711#712#0" expanded="true" />
@@ -36,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1028">
-              <caret line="116" column="9" lean-forward="true" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
+            <state relative-caret-position="-783">
+              <caret line="103" column="33" lean-forward="true" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -60,10 +58,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="1058" />
-    <option name="width" value="1690" />
-    <option name="height" value="1756" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
+    <option name="width" value="1850" />
+    <option name="height" value="2682" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -182,18 +181,18 @@
       <workItem from="1574060821531" duration="7741000" />
       <workItem from="1574329767543" duration="6756000" />
       <workItem from="1574350204862" duration="500000" />
-      <workItem from="1574410853598" duration="12029000" />
+      <workItem from="1574410853598" duration="15093000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48839000" />
+    <option name="totallyTimeSpent" value="51903000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="529" y="0" width="845" height="878" extended-state="0" />
+    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.03821656" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.022710068" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -202,7 +201,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3287483" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2434663" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -301,8 +300,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="346" selection-start-line="346" selection-end-line="354" selection-end-column="2" />
+        <state relative-caret-position="1296">
+          <caret line="201" column="17" lean-forward="true" selection-start-line="201" selection-start-column="17" selection-end-line="201" selection-end-column="17" />
           <folding>
             <element signature="e#639#640#0" expanded="true" />
             <element signature="e#711#712#0" expanded="true" />
@@ -312,8 +311,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1028">
-          <caret line="116" column="9" lean-forward="true" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="9" />
+        <state relative-caret-position="-783">
+          <caret line="103" column="33" lean-forward="true" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

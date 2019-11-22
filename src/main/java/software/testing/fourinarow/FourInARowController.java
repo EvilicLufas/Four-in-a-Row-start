@@ -106,6 +106,9 @@ public class FourInARowController implements Initializable {
                             nodeColour = colourPlayerTwo;
                         case EMPTY:
                             nodeColour = colourEmpty;
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + nodeStatus);
                     }
 
                     node.setStyle("-fx-background-color: " + nodeColour);
@@ -138,6 +141,13 @@ public class FourInARowController implements Initializable {
         // column. If it can be added, update the display. If it cannot be added
         // show a message in the messageArea, for example:
         // messageArea.setText("No available positions in this column.");
+
+        boolean takeTurnSuccess = game.takeTurn(selectedColumn);
+        if (takeTurnSuccess) {
+            displayBoard();
+        }else {
+            messageArea.setText("The selected column: " + (selectedColumn + 1) + "is full, please chose another column");
+        }
 
     }
 
@@ -203,6 +213,8 @@ public class FourInARowController implements Initializable {
 
         // TODO - initialise the game
 
+        game.resetGame();
+
         displayBoard();
 
         // reset the buttons so that they can be pressed.
@@ -246,6 +258,14 @@ public class FourInARowController implements Initializable {
     @FXML
     private void handleUndoAction(ActionEvent event) {
         // TODO - use the Game class to undo the most recent move. Then, redisplay the board.
+
+        boolean undoSuccess = game.undo();
+        if (undoSuccess){
+            messageArea.setText("Player: "+game.getActivePlayer()+"'s undo operation performed successfully");
+        }else{
+            messageArea.setText("Player: "+game.getActivePlayer()+" is not allowed to perform the undo operation!");
+        }
+
         messageArea.setText("undo");
     }
     
@@ -255,7 +275,14 @@ public class FourInARowController implements Initializable {
     @FXML
     private void handleRedoAction(ActionEvent event) {
         // TODO - use the Game class to redo the most recent move that was undone. Then, redisplay the board.
-       messageArea.setText("redo");  
+
+        boolean redoSuccess = game.redo();
+        if (redoSuccess){
+            messageArea.setText("Player: "+game.getActivePlayer()+"'s redo operation performed successfully");
+        }else{
+            messageArea.setText("Player: "+game.getActivePlayer()+" is not allowed to perform the redo operation!");
+        }
+        messageArea.setText("redo");
     }
     
     /** 

@@ -186,7 +186,8 @@ public class Game {
         //Situation 1 : wins vertically
         for (int i=0;i<MAXIMUM_COLUMNS;i++){
             for (int k=0;k<MAXIMUM_ROWS-3;k++){
-                if ((gameGrid[i][k] == gameGrid[i][k+1] && gameGrid[i][k] == gameGrid[i][k+2])){
+                if ((gameGrid[i][k] == gameGrid[i][k+1] && gameGrid[i][k] == gameGrid[i][k+2]
+                        && gameGrid[i][k] == gameGrid[i][k+3] && gameGrid[i][k] != CellStatus.EMPTY)){
                     isVertical = true;
                 }
             }
@@ -195,7 +196,8 @@ public class Game {
         //Situation 2 : wins horizontally
         for (int i=0;i<MAXIMUM_COLUMNS-3;i++){
             for (int k=0;k<MAXIMUM_ROWS;k++){
-                if ((gameGrid[i][k] == gameGrid[i+1][k] && gameGrid[i][k] == gameGrid[i+2][k])){
+                if ((gameGrid[i][k] == gameGrid[i+1][k] && gameGrid[i][k] == gameGrid[i+2][k]
+                        && gameGrid[i][k] == gameGrid[i+3][k] && gameGrid[i][k] != CellStatus.EMPTY)){
                     isHorizontal = true;
                 }
             }
@@ -204,7 +206,8 @@ public class Game {
         //Situation 3 : wins diagonally
         for (int i=0;i<MAXIMUM_COLUMNS-3;i++){
             for (int k=0;k<MAXIMUM_ROWS-3;k++){
-                if ((gameGrid[i][k] == gameGrid[i+1][k+1] && gameGrid[i][k] == gameGrid[i+2][k+2])){
+                if ((gameGrid[i][k] == gameGrid[i+1][k+1] && gameGrid[i][k] == gameGrid[i+2][k+2]
+                        && gameGrid[i][k] == gameGrid[i+3][k+3] && gameGrid[i][k] != CellStatus.EMPTY)){
                     isDiagonal = true;
                 }
             }
