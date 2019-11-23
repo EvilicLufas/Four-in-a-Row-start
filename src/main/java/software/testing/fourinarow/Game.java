@@ -60,8 +60,6 @@ public class Game {
 
         if (isFirstStart){
             //if it is the first start, the active player should be Player ONE
-            isFirstStart = false;
-            isLastPlayerOne = true;
             return Player.ONE;
         }else {
             // the sign : isLastPlayerOne
@@ -93,6 +91,11 @@ public class Game {
         hasJustUndo = false;
         //Each turn's beginning, the last turn's Player won't be able to redo
         Player currentPlayer = getActivePlayer();
+        if (isFirstStart) {
+            //if it is the first start, the active player should be Player ONE
+            isFirstStart = false;
+            isLastPlayerOne = true;
+        }
 
         if (currentPlayer == Player.TWO) {
             isLastPlayerOne = false;
@@ -117,7 +120,8 @@ public class Game {
             //see if the chosen column still got empty cells
             //if not, return false
             if (numberOfEmptyCellsInColumn(column)>0){
-                lastPositionList[0] = column;//Set the lastPositionCell's Column
+                lastPositionList[0] = column;
+                //Set the lastPositionCell's Column
                 //Because of a design error in the GUI in the original code
                 //That is, the top and bottom indexes of the same column
                 //are in the reverse order of normal
@@ -176,7 +180,7 @@ public class Game {
      * @return if the current player won, return true, if not, return false
      */
     public boolean hasWon(){
-        Player currentPlayer = getActivePlayer();
+//        Player currentPlayer = getActivePlayer();
         boolean isVertical = false;
         boolean isDiagonal = false;
         boolean isHorizontal = false;
@@ -230,10 +234,18 @@ public class Game {
         int lastCellColumn = lastPositionList[0];
         int lastCellRow = lastPositionList[1];
 
-        if ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
-                && getActivePlayer() == Player.ONE) ||
-                (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
-                && getActivePlayer() == Player.ONE)){
+
+        // In the judgment condition of this statement,
+        // we set the undo() to be allowed once the "player color" of the last modified CELL is different from the result of getActivePlayer()
+        // because in the takeTurn() method, once we run the takeTurn () method.
+        // The two identifiers(isFirstStart & isLastPlayerOne) will be changed, so when we call the getActivePlayer() method
+        // in the undo() and redo methods after using the takeTurn() method, the result will be the active player in the next turn
+        // So undo() is only allowed if the current player of turn is the same as the last modified cell
+        // which also means the next player differs from last modified cell, that is the logic below:
+        if (((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
+                && getActivePlayer() == Player.TWO)) ||
+                ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
+                && getActivePlayer() == Player.ONE))){
             //Set the last modified Cell to empty status
 
             gameGrid[lastCellColumn][lastCellRow] = CellStatus.EMPTY;
@@ -266,10 +278,11 @@ public class Game {
             //Means it is in the same turn and the next turn did not begin
             //So the redo operation is allowed
             if (getActivePlayer() == Player.ONE){
-                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
+//                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
+                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_TWO;
                 return true;
             }else if (getActivePlayer() == Player.TWO){
-                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_TWO;
+                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
                 return true;
             }
 
@@ -343,6 +356,16 @@ public class Game {
     }
 }
 
+/**
+ * Vellichor: Some statement in Chinese of the logic written in undo() method
+ *
+ * 在这个语句的判断条件中，之所以设置为当上一个CELL的玩家颜色与当前玩家的颜色不同时才设置为允许Undo，
+ * 是因为在taketurn() 方法中， 我们设置了一旦运行taketurn（）方法，
+ * 两个判断当前玩家的标识符就会被改变，因此当我们在使用taketurn（）方法之后，
+ * 再次在undo()和redo()方法中调用getActivePlayer()方法时，
+ * 调用的结果将会是下一个turn中的活跃玩家，也即为下一个玩家，
+ * 因此如此我们设置，以确定当前turn的玩家与last modified cell 色块相同时，才允许undo()
+ */
 
 //        if (lastPlayer == null){
 //            return starterPlayer;

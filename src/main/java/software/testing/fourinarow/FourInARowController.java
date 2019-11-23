@@ -83,10 +83,11 @@ public class FourInARowController implements Initializable {
         // else {
         //     messageArea.setText("Describe some error");
         // }
-        String colourEmpty = "#eaeaea";
-        String colourPlayerOne = "#00f";
-        String colourPlayerTwo = "#f00";
-        String nodeColour = "#eaeaea";
+        //String colourEmpty = "#63B8FF";
+        String colourEmpty = "\t#F0FFFF";
+        String colourPlayerOne = "\t#FF6A6A";
+        String colourPlayerTwo = "\t#00BFFF";
+        String nodeColour;
 
         for (int column = 0; column < Game.MAXIMUM_COLUMNS; column++) {
             for (int row = 0; row < Game.MAXIMUM_ROWS; row++) {
@@ -96,14 +97,17 @@ public class FourInARowController implements Initializable {
                     CellStatus nodeStatus = CellStatus.EMPTY;
                     try {
                         nodeStatus =  game.getCellStatus(column, row);
+                        System.out.println(game.getCellStatus(column, row));
                     } catch (FourInARowException e) {
                         e.printStackTrace();
                     }
                     switch (nodeStatus){
                         case PLAYER_ONE:
                             nodeColour = colourPlayerOne;
+                            break;
                         case PLAYER_TWO:
                             nodeColour = colourPlayerTwo;
+                            break;
                         case EMPTY:
                             nodeColour = colourEmpty;
                             break;
@@ -146,7 +150,7 @@ public class FourInARowController implements Initializable {
         if (takeTurnSuccess) {
             displayBoard();
         }else {
-            messageArea.setText("The selected column: " + (selectedColumn + 1) + "is full, please chose another column");
+            messageArea.setText("The selected column: " + (selectedColumn + 1) + " is full, please chose another column");
         }
 
     }
@@ -199,7 +203,44 @@ public class FourInARowController implements Initializable {
         FourInARowDialogController dialogController = new FourInARowDialogController(); 
         dialogController.showDialog(boardGrid.getScene().getWindow());
     }
-    
+
+
+    /**
+     * reset the buttons so that they can be pressed.
+     */
+    @FXML
+    private void setAllButtonAvailable() {
+
+        // reset the buttons so that they can be pressed.
+        for(int column = 0; column < 7; column++) {
+            Node node = getNodeByRowColumnIndex(0, column);
+            if(node instanceof Button) {
+                ((Button)node).setDisable(false);
+            }
+            else {
+                System.err.println("Unexpected item found: " + node);
+            }
+        }
+    }
+
+    /**
+     * reset the buttons so that they can not be pressed.
+     */
+    @FXML
+    private void setAllButtonDisable() {
+
+        // reset the buttons so that they can be pressed.
+        for(int column = 0; column < 7; column++) {
+            Node node = getNodeByRowColumnIndex(0, column);
+            if(node instanceof Button) {
+                ((Button)node).setDisable(true);
+            }
+            else {
+                System.err.println("Unexpected item found: " + node);
+            }
+        }
+    }
+
     /**
      * Starts a game with two human players. This will initialise an empty board and
      * display that to the screen. The default situation is that the top level buttons 
@@ -218,15 +259,17 @@ public class FourInARowController implements Initializable {
         displayBoard();
 
         // reset the buttons so that they can be pressed.
-        for(int column = 0; column < 7; column++) { 
-            Node node = getNodeByRowColumnIndex(0, column);
-            if(node instanceof Button) { 
-                ((Button)node).setDisable(false);
-            }
-            else { 
-                System.err.println("Unexpected item found: " + node);
-            }
-        }
+        setAllButtonAvailable();
+//        for(int column = 0; column < 7; column++) {
+//            Node node = getNodeByRowColumnIndex(0, column);
+//            if(node instanceof Button) {
+//                ((Button)node).setDisable(false);
+//            }
+//            else {
+//                System.err.println("Unexpected item found: " + node);
+//            }
+//        }
+
         
         messageArea.setText("Starting a two player game.");
     }
@@ -259,14 +302,16 @@ public class FourInARowController implements Initializable {
     private void handleUndoAction(ActionEvent event) {
         // TODO - use the Game class to undo the most recent move. Then, redisplay the board.
 
+        game.undo();
         boolean undoSuccess = game.undo();
         if (undoSuccess){
-            messageArea.setText("Player: "+game.getActivePlayer()+"'s undo operation performed successfully");
+            messageArea.setText("Player: "+game.getActivePlayer()+"'s undo performed successfully");
         }else{
             messageArea.setText("Player: "+game.getActivePlayer()+" is not allowed to perform the undo operation!");
         }
+        displayBoard();
 
-        messageArea.setText("undo");
+//        messageArea.setText("undo");
     }
     
     /** 
@@ -276,13 +321,15 @@ public class FourInARowController implements Initializable {
     private void handleRedoAction(ActionEvent event) {
         // TODO - use the Game class to redo the most recent move that was undone. Then, redisplay the board.
 
+        game.redo();
         boolean redoSuccess = game.redo();
         if (redoSuccess){
             messageArea.setText("Player: "+game.getActivePlayer()+"'s redo operation performed successfully");
         }else{
             messageArea.setText("Player: "+game.getActivePlayer()+" is not allowed to perform the redo operation!");
         }
-        messageArea.setText("redo");
+        displayBoard();
+//        messageArea.setText("redo");
     }
     
     /** 

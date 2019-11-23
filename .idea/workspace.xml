@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af1bb42c-65c2-4f90-a990-3802593b2afe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameExtraTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" afterDir="false" />
     </list>
@@ -18,24 +20,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1296">
-              <caret line="201" column="17" lean-forward="true" selection-start-line="201" selection-start-column="17" selection-end-line="201" selection-end-column="17" />
+            <state relative-caret-position="189">
+              <caret line="244" selection-start-line="244" selection-end-line="252" selection-end-column="31" />
               <folding>
-                <element signature="e#639#640#0" expanded="true" />
-                <element signature="e#711#712#0" expanded="true" />
+                <element signature="e#1265#1266#0" expanded="true" />
+                <element signature="e#1337#1338#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-783">
-              <caret line="103" column="33" lean-forward="true" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
+            <state relative-caret-position="54">
+              <caret line="225" selection-start-line="225" selection-end-line="241" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,6 +47,13 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -53,23 +62,27 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/GridPosition.java" />
-        <option value="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" />
+        <option value="$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameExtraTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="y" value="-12" />
-    <option name="width" value="1850" />
-    <option name="height" value="2682" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-10" />
+    <option name="width" value="1390" />
+    <option name="height" value="1756" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -110,12 +123,31 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="laboratory-four-in-a-row" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Four-in-a-Row-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laboratory-four-in-a-row" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Four-in-a-Row-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="laboratory-four-in-a-row" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Four-in-a-Row-start" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="fourinarow" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -181,18 +213,19 @@
       <workItem from="1574060821531" duration="7741000" />
       <workItem from="1574329767543" duration="6756000" />
       <workItem from="1574350204862" duration="500000" />
-      <workItem from="1574410853598" duration="15093000" />
+      <workItem from="1574410853598" duration="15162000" />
+      <workItem from="1574494186162" duration="16003000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51903000" />
+    <option name="totallyTimeSpent" value="67975000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
+    <frame x="-5" y="0" width="695" height="878" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.022710068" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.047244094" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -201,7 +234,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2434663" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18333334" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -290,8 +323,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
+        <state relative-caret-position="9">
           <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameGridTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-621">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameExtraTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="225" selection-start-line="225" selection-end-line="241" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -300,21 +357,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1296">
-          <caret line="201" column="17" lean-forward="true" selection-start-line="201" selection-start-column="17" selection-end-line="201" selection-end-column="17" />
+        <state relative-caret-position="189">
+          <caret line="244" selection-start-line="244" selection-end-line="252" selection-end-column="31" />
           <folding>
-            <element signature="e#639#640#0" expanded="true" />
-            <element signature="e#711#712#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-783">
-          <caret line="103" column="33" lean-forward="true" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1265#1266#0" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
           </folding>
         </state>
       </provider>
