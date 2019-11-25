@@ -149,6 +149,22 @@ public class FourInARowController implements Initializable {
         boolean takeTurnSuccess = game.takeTurn(selectedColumn);
         if (takeTurnSuccess) {
             displayBoard();
+            if (game.hasWon()){
+                //On reason of the logic in the takeTurn() method
+                //here game.getActivePlayer() actually means getNextPlayer()
+                //So we change the "winner tips" here
+                String winner = " ";
+                switch (game.getActivePlayer()){
+                    case ONE:
+                        winner = "TWO";
+                        break;
+                    case TWO:
+                        winner = "ONE";
+                        break;
+                }
+                messageArea.setText("The player: " + winner + " has won! Congratulations!");
+                setAllButtonDisable();
+            }
         }else {
             messageArea.setText("The selected column: " + (selectedColumn + 1) + " is full, please chose another column");
         }

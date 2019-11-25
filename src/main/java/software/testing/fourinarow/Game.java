@@ -66,14 +66,34 @@ public class Game {
             // should be changed in the take turn method
             // because taking each turn should be the only reason of changing players
             if (isLastPlayerOne){
-//                isLastPlayerOne = false;
                 return Player.TWO;
             }else {
-//                isLastPlayerOne = true;
                 return Player.ONE;
             }
         }
 
+    }
+
+    /**
+     * After taking one turn, which means the takeTurn() method shall return true
+     * The setSignForNextPlayer() method should set two signals: isFirstStart&isLastPlayerOne
+     * to an ideal situation, which ensures the toggling between PLayer_one & Player_two
+     * running smoothly
+     *
+     */
+    public void setSignForNextPlayer(){
+
+        if (isFirstStart) {
+            //if it is the first start, the active player should be Player ONE
+            isFirstStart = false;
+            isLastPlayerOne = true;
+        }else {
+            if (getActivePlayer() == Player.TWO) {
+                isLastPlayerOne = false;
+            } else if (getActivePlayer() == Player.ONE) {
+                isLastPlayerOne = true;
+            }
+        }
     }
 
 
@@ -88,20 +108,9 @@ public class Game {
 
     public boolean takeTurn(int column) {
 
-        hasJustUndo = false;
         //Each turn's beginning, the last turn's Player won't be able to redo
-        Player currentPlayer = getActivePlayer();
-        if (isFirstStart) {
-            //if it is the first start, the active player should be Player ONE
-            isFirstStart = false;
-            isLastPlayerOne = true;
-        }
+//        Player currentPlayer = getActivePlayer();
 
-        if (currentPlayer == Player.TWO) {
-            isLastPlayerOne = false;
-        } else if (currentPlayer == Player.ONE) {
-            isLastPlayerOne = true;
-        }
         //Maybe it is also OK to ignore the code below
         //because in logic we can equal null to CellStatus.EMPTY
         //And for taking each turn it is meaningless to initialize all cell status
@@ -131,20 +140,32 @@ public class Game {
                     //Once an empty cell is founded, change it status to the current player
                     //and return true, if could not found one, return false
                     if (gameGrid[column][i] == CellStatus.EMPTY) {
+                        if (hasJustUndo) {
+                            setSignForNextPlayer();
+                        }
                         lastPositionList[1] = i;//Set the lastPositionCell's row
-                        if (currentPlayer == Player.ONE) {
+                        if (getActivePlayer() == Player.ONE) {
                             gameGrid[column][i] = CellStatus.PLAYER_ONE;
                             //Once one turn the player played successful
                             //Judge if the current player has won with the hasWon() method
+                            //Actually this is meaningless because of the "winner tips" written in controller
                             if (hasWon()){
                                 System.out.println("The current player"+ getActivePlayer() +" has won");
                             }
+                            //This turn, the player played successfully
+                            //So change the sign to set the next player
+                            setSignForNextPlayer();
+                            //change the sign so current player can't redo() again
+                            //unless the player use another undo()
+                            hasJustUndo = false;
                             return true;
-                        } else if (currentPlayer == Player.TWO) {
+                        } else if (getActivePlayer() == Player.TWO) {
                             gameGrid[column][i] = CellStatus.PLAYER_TWO;
                             if (hasWon()){
                                 System.out.println("The current player"+ getActivePlayer() +" has won");
                             }
+                            setSignForNextPlayer();
+                            hasJustUndo = false;
                             return true;
                         }
                     }
@@ -182,10 +203,10 @@ public class Game {
     public boolean hasWon(){
 //        Player currentPlayer = getActivePlayer();
         boolean isVertical = false;
-        boolean isDiagonal = false;
         boolean isHorizontal = false;
-//        boolean winPlayerOne = false;
-//        boolean winPlayerTwo = false;
+        boolean isDiagonalUp2Down = false;
+        boolean isDiagonalDown2Up = false;
+
 
         //Situation 1 : wins vertically
         for (int i=0;i<MAXIMUM_COLUMNS;i++){
@@ -207,19 +228,38 @@ public class Game {
             }
         }
 
-        //Situation 3 : wins diagonally
+        //Situation 3 : wins diagonally (left to right, up to down)
         for (int i=0;i<MAXIMUM_COLUMNS-3;i++){
             for (int k=0;k<MAXIMUM_ROWS-3;k++){
-                if ((gameGrid[i][k] == gameGrid[i+1][k+1] && gameGrid[i][k] == gameGrid[i+2][k+2]
-                        && gameGrid[i][k] == gameGrid[i+3][k+3] && gameGrid[i][k] != CellStatus.EMPTY)){
-                    isDiagonal = true;
-                }
+                isDiagonalUp2Down = isDiagonal(isDiagonalUp2Down, i, k);
             }
         }
+
+        //Situation 4 : wins diagonally (left to right, down to up)
+        for (int i=MAXIMUM_COLUMNS-3;i>=0;i--){
+            for (int k=MAXIMUM_ROWS-3;k<=0;k--){
+                isDiagonalDown2Up = isDiagonal(isDiagonalDown2Up, i, k);
+            }
+        }
+
         // Once one condition is satisfied, return true
-        return isDiagonal || isVertical || isHorizontal;
+        return isDiagonalUp2Down || isDiagonalDown2Up || isVertical || isHorizontal;
     }
 
+    /**
+     *
+     * @param isDiagonal judge if wins diagonally
+     * @param i column number
+     * @param k row number
+     * @return
+     */
+    private boolean isDiagonal(boolean isDiagonal, int i, int k) {
+        if ((gameGrid[i][k] == gameGrid[i+1][k+1] && gameGrid[i][k] == gameGrid[i+2][k+2]
+                && gameGrid[i][k] == gameGrid[i+3][k+3] && gameGrid[i][k] != CellStatus.EMPTY)){
+            isDiagonal = true;
+        }
+        return isDiagonal;
+    }
 
 
     /**
@@ -273,7 +313,7 @@ public class Game {
         int lastCellColumn = lastPositionList[0];
         int lastCellRow = lastPositionList[1];
         //Only after undo can the current player perform redo
-        if (hasJustUndo = true){
+        if (hasJustUndo){
             //If the last modified cell's player is current active player
             //Means it is in the same turn and the next turn did not begin
             //So the redo operation is allowed
@@ -352,8 +392,8 @@ public class Game {
                 gameGrid[column][row] = CellStatus.EMPTY;
             }
         }
-
     }
+
 }
 
 /**
