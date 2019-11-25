@@ -231,14 +231,20 @@ public class Game {
         //Situation 3 : wins diagonally (left to right, up to down)
         for (int i=0;i<MAXIMUM_COLUMNS-3;i++){
             for (int k=0;k<MAXIMUM_ROWS-3;k++){
-                isDiagonalUp2Down = isDiagonal(isDiagonalUp2Down, i, k);
+                if ((gameGrid[i][k] == gameGrid[i+1][k+1] && gameGrid[i][k] == gameGrid[i+2][k+2]
+                        && gameGrid[i][k] == gameGrid[i+3][k+3] && gameGrid[i][k] != CellStatus.EMPTY)){
+                    isDiagonalUp2Down = true;
+                }
             }
         }
 
         //Situation 4 : wins diagonally (left to right, down to up)
-        for (int i=MAXIMUM_COLUMNS-3;i>=0;i--){
-            for (int k=MAXIMUM_ROWS-3;k<=0;k--){
-                isDiagonalDown2Up = isDiagonal(isDiagonalDown2Up, i, k);
+        for (int i=0;i<MAXIMUM_COLUMNS-3;i++){
+            for (int k=MAXIMUM_ROWS-1;k>=3;k--){
+                if ((gameGrid[i][k] == gameGrid[i+1][k-1] && gameGrid[i][k] == gameGrid[i+2][k-2]
+                        && gameGrid[i][k] == gameGrid[i+3][k-3] && gameGrid[i][k] != CellStatus.EMPTY)){
+                    isDiagonalDown2Up = true;
+                }
             }
         }
 
@@ -246,20 +252,7 @@ public class Game {
         return isDiagonalUp2Down || isDiagonalDown2Up || isVertical || isHorizontal;
     }
 
-    /**
-     *
-     * @param isDiagonal judge if wins diagonally
-     * @param i column number
-     * @param k row number
-     * @return
-     */
-    private boolean isDiagonal(boolean isDiagonal, int i, int k) {
-        if ((gameGrid[i][k] == gameGrid[i+1][k+1] && gameGrid[i][k] == gameGrid[i+2][k+2]
-                && gameGrid[i][k] == gameGrid[i+3][k+3] && gameGrid[i][k] != CellStatus.EMPTY)){
-            isDiagonal = true;
-        }
-        return isDiagonal;
-    }
+
 
 
     /**
