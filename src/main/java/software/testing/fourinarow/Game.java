@@ -90,7 +90,8 @@ public class Game {
         }else {
             if (getActivePlayer() == Player.TWO) {
                 isLastPlayerOne = false;
-            } else if (getActivePlayer() == Player.ONE) {
+//            } else if (getActivePlayer() == Player.ONE) {
+            }else {
                 isLastPlayerOne = true;
             }
         }
@@ -108,23 +109,9 @@ public class Game {
 
     public boolean takeTurn(int column) {
 
-        //Each turn's beginning, the last turn's Player won't be able to redo
-//        Player currentPlayer = getActivePlayer();
-
-        //Maybe it is also OK to ignore the code below
-        //because in logic we can equal null to CellStatus.EMPTY
-        //And for taking each turn it is meaningless to initialize all cell status
-        //Though for all of these, I still chose to initialize all of the cell status to EMPTY
-        //Because for the original game, if you don't use reset() function
-        //the gameGrid will be null but not EMPTY which may effect other logic
-        for (int i = 0; i < MAXIMUM_COLUMNS; i++) {
-            for (int k = 0; k < MAXIMUM_ROWS; k++) {
-                if (gameGrid[i][k] == null) {
-                    gameGrid[i][k] = CellStatus.EMPTY;
-                }
-            }
-        }
-
+//        if (column < 0 || column >=MAXIMUM_COLUMNS){
+//            throw new IllegalArgumentException("Selected column can not be negative or bigger than MAXIMUM_COLUMNS-1 !");
+//        }else {
         try {
             //see if the chosen column still got empty cells
             //if not, return false
@@ -159,7 +146,8 @@ public class Game {
                             //unless the player use another undo()
                             hasJustUndo = false;
                             return true;
-                        } else if (getActivePlayer() == Player.TWO) {
+//                        } else if (getActivePlayer() == Player.TWO) {
+                        } else{
                             gameGrid[column][i] = CellStatus.PLAYER_TWO;
                             if (hasWon()){
                                 System.out.println("The current player"+ getActivePlayer() +" has won");
@@ -174,6 +162,7 @@ public class Game {
         } catch (FourInARowException e) {
             e.printStackTrace();
         }
+//        }
         return false;
     }
 
@@ -275,21 +264,17 @@ public class Game {
         // in the undo() and redo methods after using the takeTurn() method, the result will be the active player in the next turn
         // So undo() is only allowed if the current player of turn is the same as the last modified cell
         // which also means the next player differs from last modified cell, that is the logic below:
-        if (((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
-                && getActivePlayer() == Player.TWO)) ||
-                ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
-                && getActivePlayer() == Player.ONE))){
-            //Set the last modified Cell to empty status
+        if (((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE && getActivePlayer() == Player.TWO))
+                || ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO && getActivePlayer() == Player.ONE))){
 
             gameGrid[lastCellColumn][lastCellRow] = CellStatus.EMPTY;
-
+            //Set the last modified Cell to empty status
             hasJustUndo = true;
             //After undo, the signal hasJustUndo will be set to true
             //While in the each beginning of the turn, the signal will be set to false
             //To prevent that the player use redo in different turn to cause chaos
             return true;
         }
-
         return false;
     }
 
@@ -307,6 +292,7 @@ public class Game {
         int lastCellRow = lastPositionList[1];
         //Only after undo can the current player perform redo
         if (hasJustUndo){
+            hasJustUndo = false;
             //If the last modified cell's player is current active player
             //Means it is in the same turn and the next turn did not begin
             //So the redo operation is allowed
@@ -314,7 +300,8 @@ public class Game {
 //                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
                 gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_TWO;
                 return true;
-            }else if (getActivePlayer() == Player.TWO){
+//            }else if (getActivePlayer() == Player.TWO){
+            }else{
                 gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
                 return true;
             }
@@ -423,4 +410,21 @@ public class Game {
 //        }else if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
 //                && getActivePlayer() == Player.TWO) {
 //            return true;
+//        }
+
+
+
+
+//Maybe it is also OK to ignore the code below
+//because in logic we can equal null to CellStatus.EMPTY
+//And for taking each turn it is meaningless to initialize all cell status
+//Though for all of these, I still chose to initialize all of the cell status to EMPTY
+//Because for the original game, if you don't use reset() function
+//the gameGrid will be null but not EMPTY which may effect other logic
+//        for (int i = 0; i < MAXIMUM_COLUMNS; i++) {
+//            for (int k = 0; k < MAXIMUM_ROWS; k++) {
+//                if (gameGrid[i][k] == null) {
+//                    gameGrid[i][k] = CellStatus.EMPTY;
+//                }
+//            }
 //        }

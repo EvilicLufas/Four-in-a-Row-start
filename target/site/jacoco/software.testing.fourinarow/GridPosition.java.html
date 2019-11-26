@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GridPosition.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laboratory-four-in-a-row</a> &gt; <a href="index.source.html" class="el_package">software.testing.fourinarow</a> &gt; <span class="el_source">GridPosition.java</span></div><h1>GridPosition.java</h1><pre class="source lang-java linenums">package software.testing.fourinarow;
+
+/**
+ * Represents a cell in the Grid that is shown in the main window. This allows 
+ * a pair of values to be represented and returned from a search in the JavaFX
+ * grid.
+ * 
+ * @author Neil Taylor (nst@aber.ac.uk)
+ */
+public class  GridPosition {
+    
+	/** The row */ 
+    private Integer row;
+    
+    /** The column */ 
+    private Integer column; 
+    
+    /**
+     * Creates a new instance with default values of 0 and 0.
+     */
+<span class="fc" id="L21">    public GridPosition() { </span>
+<span class="fc" id="L22">    	row = 0; </span>
+<span class="fc" id="L23">    	column = 0; </span>
+<span class="fc" id="L24">    }</span>
+    
+    /**
+     * Gets the row value.
+     * 
+     * @return The number, which is 0 or greater.
+     */
+    public Integer getRow() { 
+<span class="fc" id="L32">        return row;</span>
+    }
+    
+    /**
+     * Sets the row value. 
+     * 
+     * @param row The row value. If null is passed in, it will be converted to a 0.
+     * @throws IllegalArgumentException if the value is negative.
+     */
+    public void setRow(Integer row) { 
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if(row == null) { </span>
+<span class="fc" id="L43">            this.row = 0; </span>
+        }
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        else if(row &gt;= 0) { </span>
+<span class="fc" id="L46">            this.row = row;</span>
+        }
+        else { 
+<span class="fc" id="L49">        	throw new IllegalArgumentException(&quot;Column value must be 0 or more.&quot;);</span>
+        }
+<span class="fc" id="L51">    }</span>
+    
+    /**
+     * Gets the column value.
+     * @return The column value, which is 0 or greater.
+     */
+    public Integer getColumn() { 
+<span class="fc" id="L58">        return column;</span>
+    }
+    
+    /**
+     * Sets the column number.
+     * 
+     * @param column The number for the column. If the parameter is null, the value is converted to 0.
+     * @throws IllegalArgumentException if the parameter is less than 0.
+     */
+    public void setColumn(Integer column) {
+<span class="fc bfc" id="L68" title="All 2 branches covered.">    	if(column == null) { </span>
+<span class="fc" id="L69">            this.column = 0; </span>
+        }
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        else if(column &gt;= 0) { </span>
+<span class="fc" id="L72">            this.column = column;</span>
+        }
+        else { 
+<span class="fc" id="L75">        	throw new IllegalArgumentException(&quot;Column value must be 0 or more.&quot;); </span>
+        }
+<span class="fc" id="L77">    }</span>
+    
+    /** 
+     * Creates a string representation, showing the format &lt;code&gt;[row,column]&lt;/code&gt;.
+     */
+    @Override 
+    public String toString() { 
+<span class="nc" id="L84">        return &quot;[&quot; + row + &quot;,&quot; + column + &quot;]&quot;;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

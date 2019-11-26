@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laboratory-four-in-a-row</a> &gt; <a href="index.source.html" class="el_package">software.testing.fourinarow</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package software.testing.fourinarow;
+
+import java.util.ArrayList;
+
+/**
+ * Represents the grid that holds the pieces that have been
+ * placed into each column.
+ */
+public class Game {
+
+    /** The maximum number of rows in the game grid */
+<span class="fc" id="L12">    public static int MAXIMUM_ROWS = 6;</span>
+
+    /** The maximum number of columns in the game grid */
+<span class="fc" id="L15">    public static int MAXIMUM_COLUMNS = 7;</span>
+
+    /** The game grid that holds information about the status of each cell */
+    private CellStatus[][] gameGrid;
+
+    /**
+     * The boolean variable isFirstStart judges if the game is just going to start
+     * The boolean variable isLastPlayerOne is used to judge the last player
+     * so we can get the current player
+     */
+<span class="fc" id="L25">    private static boolean isFirstStart = true;</span>
+<span class="fc" id="L26">    private static boolean isLastPlayerOne = false;</span>
+
+    //This array is used to record the last Modified Cell's column &amp; row number
+<span class="fc" id="L29">    private static int[] lastPositionList = new int[2];</span>
+
+    //The way to implement redo &amp; undo is to record the last filled Cell
+    //Then set the condition to redo or undo
+<span class="fc" id="L33">    private static boolean hasJustUndo = false;</span>
+
+
+
+
+
+
+    /**
+     * Creates a new instance, initialising the board with the
+     * Maximum values for columns and rows.
+     */
+<span class="fc" id="L44">    public Game() {</span>
+<span class="fc" id="L45">        gameGrid = new CellStatus[MAXIMUM_COLUMNS][MAXIMUM_ROWS];</span>
+<span class="fc" id="L46">    }</span>
+
+
+
+    /**
+     * The class manages which player is currently active.
+     *
+     * Player One should be the first player to take a turn.
+     * After a turn is taken by Player One, Player Two becomes the active player.
+     * Then, Player One and so on.
+     *
+     * @return current active player
+     */
+    public Player getActivePlayer(){
+
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (isFirstStart){</span>
+            //if it is the first start, the active player should be Player ONE
+<span class="fc" id="L63">            return Player.ONE;</span>
+        }else {
+            // the sign : isLastPlayerOne
+            // should be changed in the take turn method
+            // because taking each turn should be the only reason of changing players
+<span class="fc bfc" id="L68" title="All 2 branches covered.">            if (isLastPlayerOne){</span>
+<span class="fc" id="L69">                return Player.TWO;</span>
+            }else {
+<span class="fc" id="L71">                return Player.ONE;</span>
+            }
+        }
+
+    }
+
+    /**
+     * After taking one turn, which means the takeTurn() method shall return true
+     * The setSignForNextPlayer() method should set two signals: isFirstStart&amp;isLastPlayerOne
+     * to an ideal situation, which ensures the toggling between PLayer_one &amp; Player_two
+     * running smoothly
+     *
+     */
+    public void setSignForNextPlayer(){
+
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (isFirstStart) {</span>
+            //if it is the first start, the active player should be Player ONE
+<span class="fc" id="L88">            isFirstStart = false;</span>
+<span class="fc" id="L89">            isLastPlayerOne = true;</span>
+        }else {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">            if (getActivePlayer() == Player.TWO) {</span>
+<span class="fc" id="L92">                isLastPlayerOne = false;</span>
+//            } else if (getActivePlayer() == Player.ONE) {
+            }else {
+<span class="fc" id="L95">                isLastPlayerOne = true;</span>
+            }
+        }
+<span class="fc" id="L98">    }</span>
+
+
+    /**
+     * By specifying the column that the player has selected.
+     * The code will then find the lowest row in that column that is empty and insert the piece.
+     *
+     * @param column  the column selected by current player
+     * @return If the column is full, the value false should be returned.
+     * True is returned if the piece can be placed.
+     */
+
+    public boolean takeTurn(int column) {
+
+//        if (column &lt; 0 || column &gt;=MAXIMUM_COLUMNS){
+//            throw new IllegalArgumentException(&quot;Selected column can not be negative or bigger than MAXIMUM_COLUMNS-1 !&quot;);
+//        }else {
+        try {
+            //see if the chosen column still got empty cells
+            //if not, return false
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (numberOfEmptyCellsInColumn(column)&gt;0){</span>
+<span class="fc" id="L119">                lastPositionList[0] = column;</span>
+                //Set the lastPositionCell's Column
+                //Because of a design error in the GUI in the original code
+                //That is, the top and bottom indexes of the same column
+                //are in the reverse order of normal
+                //So traversal is done here using the opposite logic
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">                for (int i = MAXIMUM_ROWS - 1; i &gt;=0 ; i--) {</span>
+                    //the traversal begin at the bottom of the selected column
+                    //Once an empty cell is founded, change it status to the current player
+                    //and return true, if could not found one, return false
+<span class="fc bfc" id="L129" title="All 2 branches covered.">                    if (gameGrid[column][i] == CellStatus.EMPTY) {</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">                        if (hasJustUndo) {</span>
+<span class="fc" id="L131">                            setSignForNextPlayer();</span>
+                        }
+<span class="fc" id="L133">                        lastPositionList[1] = i;//Set the lastPositionCell's row</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">                        if (getActivePlayer() == Player.ONE) {</span>
+<span class="fc" id="L135">                            gameGrid[column][i] = CellStatus.PLAYER_ONE;</span>
+                            //Once one turn the player played successful
+                            //Judge if the current player has won with the hasWon() method
+                            //Actually this is meaningless because of the &quot;winner tips&quot; written in controller
+<span class="fc bfc" id="L139" title="All 2 branches covered.">                            if (hasWon()){</span>
+<span class="fc" id="L140">                                System.out.println(&quot;The current player&quot;+ getActivePlayer() +&quot; has won&quot;);</span>
+                            }
+                            //This turn, the player played successfully
+                            //So change the sign to set the next player
+<span class="fc" id="L144">                            setSignForNextPlayer();</span>
+                            //change the sign so current player can't redo() again
+                            //unless the player use another undo()
+<span class="fc" id="L147">                            hasJustUndo = false;</span>
+<span class="fc" id="L148">                            return true;</span>
+//                        } else if (getActivePlayer() == Player.TWO) {
+                        } else{
+<span class="fc" id="L151">                            gameGrid[column][i] = CellStatus.PLAYER_TWO;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                            if (hasWon()){</span>
+<span class="fc" id="L153">                                System.out.println(&quot;The current player&quot;+ getActivePlayer() +&quot; has won&quot;);</span>
+                            }
+<span class="fc" id="L155">                            setSignForNextPlayer();</span>
+<span class="fc" id="L156">                            hasJustUndo = false;</span>
+<span class="fc" id="L157">                            return true;</span>
+                        }
+                    }
+                }
+            }
+<span class="fc" id="L162">        } catch (FourInARowException e) {</span>
+<span class="fc" id="L163">            e.printStackTrace();</span>
+<span class="fc" id="L164">        }</span>
+//        }
+<span class="fc" id="L166">        return false;</span>
+    }
+
+    /**
+     * stop the current game and reset the game to be started again.
+     * The player turns will be reset.
+     * The Undo and Redo facility will be reset.
+     */
+    public void resetGame(){
+
+        //set all cell status to EMPTY
+<span class="fc" id="L177">        reset();</span>
+        //set the game to the start
+<span class="fc" id="L179">        isFirstStart = true;</span>
+<span class="fc" id="L180">        isLastPlayerOne = false;</span>
+
+<span class="fc" id="L182">    }</span>
+
+    /**
+     * After a player has taken a turn, check if the player has won
+     * Three boolean variables : isVertical &amp; isDiagonal &amp; isHorizontal
+     * represent 3 ways to win the game
+     * As long as one of these conditions is met, the current player wins
+     *
+     * @return if the current player won, return true, if not, return false
+     */
+    public boolean hasWon(){
+//        Player currentPlayer = getActivePlayer();
+<span class="fc" id="L194">        boolean isVertical = false;</span>
+<span class="fc" id="L195">        boolean isHorizontal = false;</span>
+<span class="fc" id="L196">        boolean isDiagonalUp2Down = false;</span>
+<span class="fc" id="L197">        boolean isDiagonalDown2Up = false;</span>
+
+
+        //Situation 1 : wins vertically
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        for (int i=0;i&lt;MAXIMUM_COLUMNS;i++){</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">            for (int k=0;k&lt;MAXIMUM_ROWS-3;k++){</span>
+<span class="fc bfc" id="L203" title="All 8 branches covered.">                if ((gameGrid[i][k] == gameGrid[i][k+1] &amp;&amp; gameGrid[i][k] == gameGrid[i][k+2]</span>
+                        &amp;&amp; gameGrid[i][k] == gameGrid[i][k+3] &amp;&amp; gameGrid[i][k] != CellStatus.EMPTY)){
+<span class="fc" id="L205">                    isVertical = true;</span>
+                }
+            }
+        }
+
+        //Situation 2 : wins horizontally
+<span class="fc bfc" id="L211" title="All 2 branches covered.">        for (int i=0;i&lt;MAXIMUM_COLUMNS-3;i++){</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">            for (int k=0;k&lt;MAXIMUM_ROWS;k++){</span>
+<span class="fc bfc" id="L213" title="All 8 branches covered.">                if ((gameGrid[i][k] == gameGrid[i+1][k] &amp;&amp; gameGrid[i][k] == gameGrid[i+2][k]</span>
+                        &amp;&amp; gameGrid[i][k] == gameGrid[i+3][k] &amp;&amp; gameGrid[i][k] != CellStatus.EMPTY)){
+<span class="fc" id="L215">                    isHorizontal = true;</span>
+                }
+            }
+        }
+
+        //Situation 3 : wins diagonally (left to right, up to down)
+<span class="fc bfc" id="L221" title="All 2 branches covered.">        for (int i=0;i&lt;MAXIMUM_COLUMNS-3;i++){</span>
+<span class="fc bfc" id="L222" title="All 2 branches covered.">            for (int k=0;k&lt;MAXIMUM_ROWS-3;k++){</span>
+<span class="fc bfc" id="L223" title="All 8 branches covered.">                if ((gameGrid[i][k] == gameGrid[i+1][k+1] &amp;&amp; gameGrid[i][k] == gameGrid[i+2][k+2]</span>
+                        &amp;&amp; gameGrid[i][k] == gameGrid[i+3][k+3] &amp;&amp; gameGrid[i][k] != CellStatus.EMPTY)){
+<span class="fc" id="L225">                    isDiagonalUp2Down = true;</span>
+                }
+            }
+        }
+
+        //Situation 4 : wins diagonally (left to right, down to up)
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        for (int i=0;i&lt;MAXIMUM_COLUMNS-3;i++){</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">            for (int k=MAXIMUM_ROWS-1;k&gt;=3;k--){</span>
+<span class="fc bfc" id="L233" title="All 8 branches covered.">                if ((gameGrid[i][k] == gameGrid[i+1][k-1] &amp;&amp; gameGrid[i][k] == gameGrid[i+2][k-2]</span>
+                        &amp;&amp; gameGrid[i][k] == gameGrid[i+3][k-3] &amp;&amp; gameGrid[i][k] != CellStatus.EMPTY)){
+<span class="fc" id="L235">                    isDiagonalDown2Up = true;</span>
+                }
+            }
+        }
+
+        // Once one condition is satisfied, return true
+<span class="fc bfc" id="L241" title="All 8 branches covered.">        return isDiagonalUp2Down || isDiagonalDown2Up || isVertical || isHorizontal;</span>
+    }
+
+
+
+
+    /**
+     * The undo must come before the next player takes a turn.
+     * Once the other player takes a turn, the undo operation should do nothing.
+     *
+     * @return
+     * The method returns true for success
+     * or false if the move cannot be made
+     */
+    public boolean undo(){
+<span class="fc" id="L256">        int lastCellColumn = lastPositionList[0];</span>
+<span class="fc" id="L257">        int lastCellRow = lastPositionList[1];</span>
+
+
+        // In the judgment condition of this statement,
+        // we set the undo() to be allowed once the &quot;player color&quot; of the last modified CELL is different from the result of getActivePlayer()
+        // because in the takeTurn() method, once we run the takeTurn () method.
+        // The two identifiers(isFirstStart &amp; isLastPlayerOne) will be changed, so when we call the getActivePlayer() method
+        // in the undo() and redo methods after using the takeTurn() method, the result will be the active player in the next turn
+        // So undo() is only allowed if the current player of turn is the same as the last modified cell
+        // which also means the next player differs from last modified cell, that is the logic below:
+<span class="fc bfc" id="L267" title="All 6 branches covered.">        if (((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE &amp;&amp; getActivePlayer() == Player.TWO))</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">                || ((gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO &amp;&amp; getActivePlayer() == Player.ONE))){</span>
+
+<span class="fc" id="L270">            gameGrid[lastCellColumn][lastCellRow] = CellStatus.EMPTY;</span>
+            //Set the last modified Cell to empty status
+<span class="fc" id="L272">            hasJustUndo = true;</span>
+            //After undo, the signal hasJustUndo will be set to true
+            //While in the each beginning of the turn, the signal will be set to false
+            //To prevent that the player use redo in different turn to cause chaos
+<span class="fc" id="L276">            return true;</span>
+        }
+<span class="fc" id="L278">        return false;</span>
+    }
+
+    /**
+     * If a player has undone their last turn, the player can redo that move.
+     * The redo must come before the next player takes a turn.
+     * Once the other player takes a turn, the redo operation should do nothing.
+     *
+     * @return
+     * The method returns true for success or false if the move cannot be made.
+     *
+     */
+    public boolean redo(){
+<span class="fc" id="L291">        int lastCellColumn = lastPositionList[0];</span>
+<span class="fc" id="L292">        int lastCellRow = lastPositionList[1];</span>
+        //Only after undo can the current player perform redo
+<span class="fc bfc" id="L294" title="All 2 branches covered.">        if (hasJustUndo){</span>
+<span class="fc" id="L295">            hasJustUndo = false;</span>
+            //If the last modified cell's player is current active player
+            //Means it is in the same turn and the next turn did not begin
+            //So the redo operation is allowed
+<span class="fc bfc" id="L299" title="All 2 branches covered.">            if (getActivePlayer() == Player.ONE){</span>
+//                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;
+<span class="fc" id="L301">                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_TWO;</span>
+<span class="fc" id="L302">                return true;</span>
+//            }else if (getActivePlayer() == Player.TWO){
+            }else{
+<span class="fc" id="L305">                gameGrid[lastCellColumn][lastCellRow] = CellStatus.PLAYER_ONE;</span>
+<span class="fc" id="L306">                return true;</span>
+            }
+
+        }
+<span class="fc" id="L310">        return false;</span>
+    }
+
+    /**
+     * Returns the number of cells in a column that have the status
+     * GridCellStatus.EMPTY.
+     *
+     * @param column The column to check. This is 0 indexed, so 0 represents column 1.
+     * @return A count of the number of empty cells.
+     * @throws FourInARowException if the column value is outside the range
+     * 0 to MAXIMUM_COLUMNS.
+     */
+    public int numberOfEmptyCellsInColumn(int column) throws FourInARowException {
+
+<span class="fc" id="L324">        int emptyCount = 0;</span>
+
+<span class="fc bfc" id="L326" title="All 2 branches covered.">        for(int row = 0; row &lt; MAXIMUM_ROWS; row++) {</span>
+<span class="fc bfc" id="L327" title="All 2 branches covered.">            if(getCellStatus(column, row) == CellStatus.EMPTY) {</span>
+<span class="fc" id="L328">                emptyCount++;</span>
+            }
+        }
+
+<span class="fc" id="L332">        return emptyCount;</span>
+    }
+
+    /**
+     * Gets the GridCellStatus for a cell at the given grid position.
+     * @param row The number of the row, with 0 representing the first row.
+     * @param column The number of the column, with 0 representing the first column.
+     * @return The status value for the grid at the specified position.
+     * @throws FourInARowException if the row or column number is out of bounds for the
+     * number of rows and columns.
+     */
+    public CellStatus getCellStatus(int column, int row)
+           throws FourInARowException {
+
+<span class="fc bfc" id="L346" title="All 2 branches covered.">        if(row &lt; 0) {</span>
+<span class="fc" id="L347">            throw new FourInARowException(&quot;Row cannot be negative&quot;);</span>
+        }
+
+<span class="fc bfc" id="L350" title="All 2 branches covered.">        if(row &gt; MAXIMUM_ROWS - 1) {</span>
+<span class="fc" id="L351">            throw new FourInARowException(&quot;Row cannot be greater than the number of rows&quot;);</span>
+        }
+
+<span class="fc bfc" id="L354" title="All 2 branches covered.">        if(column &lt; 0) {</span>
+<span class="fc" id="L355">            throw new FourInARowException(&quot;Column cannot be negative&quot;);</span>
+        }
+
+<span class="fc bfc" id="L358" title="All 2 branches covered.">        if(column &gt; MAXIMUM_COLUMNS - 1) {</span>
+<span class="fc" id="L359">            throw new FourInARowException(&quot;Column cannot be greater than the number of columns&quot;);</span>
+        }
+
+<span class="fc" id="L362">        return gameGrid[column][row];</span>
+    }
+
+    /**
+     * Resets the board so that every position contains the value
+     * GridCellStatus.EMPTY.
+     */
+    public void reset() {
+<span class="fc bfc" id="L370" title="All 2 branches covered.">        for(int column = 0; column &lt; MAXIMUM_COLUMNS; column++) {</span>
+<span class="fc bfc" id="L371" title="All 2 branches covered.">            for(int row = 0; row &lt; MAXIMUM_ROWS; row++) {</span>
+<span class="fc" id="L372">                gameGrid[column][row] = CellStatus.EMPTY;</span>
+            }
+        }
+<span class="fc" id="L375">    }</span>
+
+}
+
+/**
+ * Vellichor: Some statement in Chinese of the logic written in undo() method
+ *
+ * 在这个语句的判断条件中，之所以设置为当上一个CELL的玩家颜色与当前玩家的颜色不同时才设置为允许Undo，
+ * 是因为在taketurn() 方法中， 我们设置了一旦运行taketurn（）方法，
+ * 两个判断当前玩家的标识符就会被改变，因此当我们在使用taketurn（）方法之后，
+ * 再次在undo()和redo()方法中调用getActivePlayer()方法时，
+ * 调用的结果将会是下一个turn中的活跃玩家，也即为下一个玩家，
+ * 因此如此我们设置，以确定当前turn的玩家与last modified cell 色块相同时，才允许undo()
+ */
+
+//        if (lastPlayer == null){
+//            return starterPlayer;
+//        }
+//        switch (lastPlayer){
+//            case ONE:
+//                return Player.TWO;
+//            case TWO:
+//                return Player.ONE;
+//            case :
+//                return starterPlayer;
+//        }
+//
+//
+//        Player currentPlayer = Player.ONE;
+
+
+//        if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_ONE
+//                &amp;&amp; getActivePlayer() == Player.ONE){
+//
+//            return true;
+//        }else if (gameGrid[lastCellColumn][lastCellRow] == CellStatus.PLAYER_TWO
+//                &amp;&amp; getActivePlayer() == Player.TWO) {
+//            return true;
+//        }
+
+
+
+
+//Maybe it is also OK to ignore the code below
+//because in logic we can equal null to CellStatus.EMPTY
+//And for taking each turn it is meaningless to initialize all cell status
+//Though for all of these, I still chose to initialize all of the cell status to EMPTY
+//Because for the original game, if you don't use reset() function
+//the gameGrid will be null but not EMPTY which may effect other logic
+//        for (int i = 0; i &lt; MAXIMUM_COLUMNS; i++) {
+//            for (int k = 0; k &lt; MAXIMUM_ROWS; k++) {
+//                if (gameGrid[i][k] == null) {
+//                    gameGrid[i][k] = CellStatus.EMPTY;
+//                }
+//            }
+//        }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

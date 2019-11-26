@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FourInARowDialogController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">laboratory-four-in-a-row</a> &gt; <a href="index.source.html" class="el_package">software.testing.fourinarow</a> &gt; <span class="el_source">FourInARowDialogController.java</span></div><h1>FourInARowDialogController.java</h1><pre class="source lang-java linenums">package software.testing.fourinarow;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
+/**
+ * Creates a Dialog that uses the FXML file for the dialog. 
+ * 
+ * @author Neil Taylor (nst@aber.ac.uk)
+ */
+<span class="nc" id="L22">public class FourInARowDialogController implements Initializable {</span>
+    
+	/** Button to close the dialog. */
+    @FXML 
+    private Button closeButton;
+    
+    /**
+     * Creates and displays the About dialog. The User interface is specified 
+     * in the FXML file. 
+     * 
+     * @param window The parent window for the dialog. This dialog will be displayed 
+     * as a modal dialog in the middle of the window. 
+     */
+    public void showDialog(Window window) { 
+        try { 
+<span class="nc" id="L37">           Stage stage = new Stage();</span>
+<span class="nc" id="L38">           Parent root = FXMLLoader.load(getClass().getResource(&quot;AboutDialog.fxml&quot;));</span>
+           
+<span class="nc" id="L40">           stage.setScene(new Scene(root));</span>
+<span class="nc" id="L41">           stage.setTitle(&quot;About&quot;);</span>
+<span class="nc" id="L42">           stage.initModality(Modality.WINDOW_MODAL);</span>
+<span class="nc" id="L43">           stage.initOwner(window);</span>
+<span class="nc" id="L44">           stage.show();</span>
+        }
+<span class="nc" id="L46">        catch(IOException e) { </span>
+<span class="nc" id="L47">            System.err.println(&quot;There is something wrong here...&quot;);</span>
+<span class="nc" id="L48">            e.printStackTrace();</span>
+<span class="nc" id="L49">        }</span>
+<span class="nc" id="L50">    }</span>
+   
+    /**
+     * Closes the dialog and removes it from the screen. 
+     * 
+     * @param event The action event. This isn't used by the method.
+     */
+    @FXML
+    public void  handleAboutDialogAction(ActionEvent event) {
+<span class="nc" id="L59">        closeButton.getScene().getWindow().hide();</span>
+<span class="nc" id="L60">    }</span>
+
+    /** 
+     * Used method that is required by the Initializable interface.
+     * @param location Required for the Java interface. 
+     * @param resources Required for the Java interface. 
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+<span class="nc" id="L70">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

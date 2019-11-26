@@ -1,0 +1,6 @@
+software\testing\fourinarow\GridPositionTest.class
+software\testing\fourinarow\GridCellStatusTest.class
+software\testing\fourinarow\PlayerTest.class
+software\testing\fourinarow\GameExtraTest.class
+software\testing\fourinarow\GameGridTest.class
+software\testing\fourinarow\FourInARowExceptionTest.class
