@@ -116,53 +116,44 @@ public class Game {
             //see if the chosen column still got empty cells
             //if not, return false
             if (numberOfEmptyCellsInColumn(column)>0){
-                lastPositionList[0] = column;
                 //Set the lastPositionCell's Column
+                lastPositionList[0] = column;
+                int row = numberOfEmptyCellsInColumn(column)-1;
                 //Because of a design error in the GUI in the original code
                 //That is, the top and bottom indexes of the same column
                 //are in the reverse order of normal
                 //So traversal is done here using the opposite logic
-                for (int i = MAXIMUM_ROWS - 1; i >=0 ; i--) {
-                    //the traversal begin at the bottom of the selected column
-                    //Once an empty cell is founded, change it status to the current player
-                    //and return true, if could not found one, return false
-                    if (gameGrid[column][i] == CellStatus.EMPTY) {
-                        if (hasJustUndo) {
-                            setSignForNextPlayer();
-                        }
-                        lastPositionList[1] = i;//Set the lastPositionCell's row
-                        if (getActivePlayer() == Player.ONE) {
-                            gameGrid[column][i] = CellStatus.PLAYER_ONE;
-                            //Once one turn the player played successful
-                            //Judge if the current player has won with the hasWon() method
-                            //Actually this is meaningless because of the "winner tips" written in controller
-                            if (hasWon()){
-                                System.out.println("The current player"+ getActivePlayer() +" has won");
-                            }
-                            //This turn, the player played successfully
-                            //So change the sign to set the next player
-                            setSignForNextPlayer();
-                            //change the sign so current player can't redo() again
-                            //unless the player use another undo()
-                            hasJustUndo = false;
-                            return true;
-//                        } else if (getActivePlayer() == Player.TWO) {
-                        } else{
-                            gameGrid[column][i] = CellStatus.PLAYER_TWO;
-                            if (hasWon()){
-                                System.out.println("The current player"+ getActivePlayer() +" has won");
-                            }
-                            setSignForNextPlayer();
-                            hasJustUndo = false;
-                            return true;
-                        }
-                    }
+                //and return true, if could not found one, return false
+
+                if (hasJustUndo) {
+                    setSignForNextPlayer();
                 }
+                lastPositionList[1] = row;//Set the lastPositionCell's row
+                if (getActivePlayer() == Player.ONE) {
+                    gameGrid[column][row] = CellStatus.PLAYER_ONE;
+
+                } else{
+                    gameGrid[column][row] = CellStatus.PLAYER_TWO;
+
+                }
+                //Once one turn the player played successful
+                //Judge if the current player has won with the hasWon() method
+                //Actually this is meaningless because of the "winner tips" written in controller
+                if (hasWon()){
+                    System.out.println("The current player"+ getActivePlayer() +" has won");
+                }
+                //This turn, the player played successfully
+                //So change the sign to set the next player
+                setSignForNextPlayer();
+                //change the sign so current player can't redo() again
+                //unless the player use another undo()
+                hasJustUndo = false;
+                return true;
             }
+
         } catch (FourInARowException e) {
             e.printStackTrace();
         }
-//        }
         return false;
     }
 

@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af1bb42c-65c2-4f90-a990-3802593b2afe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameExtraTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/laboratory-four-in-a-row.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/site/jacoco/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/site/jacoco/jacoco-sessions.html" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,14 +22,14 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.81935483">
+    <splitter split-orientation="horizontal" split-proportion="0.1254162">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="35">
-                  <caret line="266" column="34" selection-start-line="266" selection-start-column="34" selection-end-line="266" selection-end-column="34" />
+                <state relative-caret-position="-563">
+                  <caret line="92" column="30" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="30" />
                   <folding>
                     <element signature="e#1265#1266#0" expanded="true" />
                     <element signature="e#1337#1338#0" expanded="true" />
@@ -42,12 +41,24 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameExtraTest.java">
+        <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARow.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-483">
-                  <caret line="431" column="29" selection-start-line="431" selection-start-column="29" selection-end-line="431" selection-end-column="29" />
+                <state relative-caret-position="133">
+                  <caret line="23" selection-start-line="23" selection-end-line="23" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-394">
+                  <caret line="156" column="36" lean-forward="true" selection-start-line="156" selection-start-column="36" selection-end-line="156" selection-end-column="36" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -126,8 +137,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,6 +220,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -238,7 +249,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html">
+  <component name="RunManager" selected="Application.FourInARow">
+    <configuration name="FourInARow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="software.testing.fourinarow.FourInARow" />
+      <module name="laboratory-four-in-a-row" />
+      <option name="VM_PARAMETERS" value="-p C:\A-MicroSD\A_3rdYear_Test\3rd-1st-SemClass-Software-Testing-Technology\lab2_workcode\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.graphics,javafx.base,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="software.testing.fourinarow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameExtraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="laboratory-four-in-a-row" />
       <extension name="coverage">
@@ -270,22 +295,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameExtraTest.shouldReturnFalse_whenUndoAfterUndo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="laboratory-four-in-a-row" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="software.testing.fourinarow.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="software.testing.fourinarow" />
-      <option name="MAIN_CLASS_NAME" value="software.testing.fourinarow.GameExtraTest" />
-      <option name="METHOD_NAME" value="shouldReturnFalse_whenUndoAfterUndo" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GameExtraTest.testCondition_undo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="laboratory-four-in-a-row" />
       <extension name="coverage">
@@ -306,19 +315,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.GameExtraTest" />
+      <item itemvalue="Application.FourInARow" />
       <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="JUnit.GameExtraTest.shouldReturnFalse_whenUndoAfterUndo" />
+      <item itemvalue="JUnit.GameExtraTest" />
       <item itemvalue="JUnit.GameExtraTest.shouldReturnFalse_whenRedoAfterRedo" />
       <item itemvalue="JUnit.GameExtraTest.testCondition_undo" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.FourInARow" />
         <item itemvalue="JavaScript Debug.index.html" />
-        <item itemvalue="JUnit.GameExtraTest.testCondition_undo" />
         <item itemvalue="JUnit.GameExtraTest" />
+        <item itemvalue="JUnit.GameExtraTest.testCondition_undo" />
         <item itemvalue="JUnit.GameExtraTest.shouldReturnFalse_whenRedoAfterRedo" />
-        <item itemvalue="JUnit.GameExtraTest.shouldReturnFalse_whenUndoAfterUndo" />
       </list>
     </recent_temporary>
   </component>
@@ -352,16 +361,13 @@
       <workItem from="1574733100627" duration="7864000" />
       <workItem from="1574746002788" duration="526000" />
       <workItem from="1574748124042" duration="8172000" />
+      <workItem from="1574775653794" duration="1819000" />
+      <workItem from="1574785153389" duration="235000" />
+      <workItem from="1574791357392" duration="3515000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GameExtraTest_shouldNotChanged_whenUndoSkipOneTurn - 2019.11.26 at 15h 38m 21s.xml">
-      <configuration name="GameExtraTest.shouldNotChanged_whenUndoSkipOneTurn" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GameExtraTest_lastCellShouldBeSamePlayer_whenRedoAfterUndo - 2019.11.26 at 15h 43m 17s.xml">
-      <configuration name="GameExtraTest.lastCellShouldBeSamePlayer_whenRedoAfterUndo" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="GameExtraTest_lastCellShouldBeSamePlayer_whenRedoAfterUndo - 2019.11.26 at 15h 45m 03s.xml">
       <configuration name="GameExtraTest.lastCellShouldBeSamePlayer_whenRedoAfterUndo" configurationId="JUnit" />
     </history-entry>
@@ -386,14 +392,20 @@
     <history-entry file="GameExtraTest_testCondition_undo - 2019.11.26 at 16h 14m 00s.xml">
       <configuration name="GameExtraTest.testCondition_undo" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="GameExtraTest - 2019.11.27 at 02h 34m 51s.xml">
+      <configuration name="GameExtraTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GameExtraTest - 2019.11.27 at 02h 43m 00s.xml">
+      <configuration name="GameExtraTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111293000" />
+    <option name="totallyTimeSpent" value="116862000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.35503405" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25208175" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -402,7 +414,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3562586" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.041265473" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.1829436" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -410,7 +422,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3287483" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3823934" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.26822558" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.21595599" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -496,17 +508,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/target/site/jacoco/jacoco.csv" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="141" column="48" selection-start-line="141" selection-start-column="48" selection-end-line="141" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/site/jacoco/index.html" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
@@ -518,16 +519,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-486">
           <caret line="19" selection-start-line="19" selection-end-line="23" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -596,23 +587,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/software/testing/fourinarow/PlayerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/software/testing/fourinarow/GameExtraTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-483">
-          <caret line="431" column="29" selection-start-line="431" selection-start-column="29" selection-end-line="431" selection-end-column="29" />
+        <state relative-caret-position="216">
+          <caret line="46" selection-start-line="45" selection-end-line="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/target/site/jacoco/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="266" column="34" selection-start-line="266" selection-start-column="34" selection-end-line="266" selection-end-column="34" />
+        <state relative-caret-position="-563">
+          <caret line="92" column="30" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="30" />
           <folding>
             <element signature="e#1265#1266#0" expanded="true" />
             <element signature="e#1337#1338#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/software/testing/fourinarow/FourInARowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-394">
+          <caret line="156" column="36" lean-forward="true" selection-start-line="156" selection-start-column="36" selection-end-line="156" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
